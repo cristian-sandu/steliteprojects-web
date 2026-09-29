@@ -1,0 +1,189 @@
+# ST ÉLITE PROJECTS
+
+Bilingual French/English Astro + TypeScript website for ST ÉLITE PROJECTS, Montreuil. Includes the approved anthracite/blue design, responsive navigation, mobile call/quote bar, service pages, project gallery support, contact form, and draft legal pages.
+
+**This is a standalone GitHub/Cloudflare project.** It contains no ChatGPT Sites identity, repository credentials, account IDs, or API keys. The downloadable project can be deployed independently of the ChatGPT Sites preview.
+
+## Stack
+
+- Astro 7, static output: `/fr/` and `/en/`, with `/` redirecting to French.
+- TypeScript and custom responsive CSS, shared Astro layouts/components.
+- Cloudflare Worker for `/api/quote`; static pages served through Workers Static Assets.
+- Cloudflare Turnstile, validated server-side, and Resend for transactional email.
+- Photos delivered as private email attachments to the company, not stored publicly or in R2. Maximum 5, JPEG/PNG/WebP, 2 MiB each, 8 MiB total. R2 is unnecessary for this initial workflow.
+- No database, CMS, analytics, advertising scripts or admin login.
+
+## 1. Run locally
+
+Install Node.js 24 LTS and use these commands in this folder:
+
+```sh
+npm ci
+cp .env.example .env
+npm run dev
+```
+
+Open the URL printed by Astro. `npm run dev` serves the website only; it does not run the Worker API. Enquiry submission is disabled by default.
+
+For the built site and Worker together:
+
+```sh
+cp .dev.vars.example .dev.vars
+npm run preview
+```
+
+Use the local address printed by Wrangler. Local email testing requires valid test credentials and matching Turnstile localhost configuration. Tests use mocked providers and send no email.
+
+```sh
+npm run check
+npm test
+npm run build
+```
+
+The dependency versions are pinned and `package-lock.json` is included. Use `npm ci` for reproducible installs.
+
+## 2. Push to your GitHub repository
+
+Create an empty private or public GitHub repository, then run:
+
+```sh
+git init
+git add .
+git commit -m "Initial Astro website"
+git branch -M main
+git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
+git push -u origin main
+```
+
+Replace the URL with your repository. No `.git` directory is included. `.env`, `.dev.vars`, `node_modules`, generated output and local Cloudflare state are ignored. Commit source and `package-lock.json`.
+
+## 3. Deploy to Cloudflare now, without a custom domain
+
+### CLI
+
+```sh
+npx wrangler login
+npm run deploy
+```
+
+Wrangler will print a `workers.dev` URL. If the Worker name is already used in your account, change `name` in `wrangler.jsonc` first.
+
+Set `PUBLIC_SITE_URL` in `.env` to that exact URL, then rebuild/deploy so canonical and alternate links use the correct origin. Keep `PUBLIC_INDEXABLE=false` for the temporary preview. No domain purchase is needed. Hosting/API usage is subject to the plans and limits of your accounts.
+
+### Automatic deployment from GitHub (recommended)
+
+In Cloudflare Workers & Pages, create/import a Worker from your GitHub repository:
+
+- Production branch: `main`
+- Root directory: this project root
+- Build command: `npm run build`
+- Deploy command: `npx wrangler deploy`
+- Set build environment `NODE_VERSION=24`
+- Set the `PUBLIC_*` build variables listed below in Cloudflare's build settings.
+
+Do not choose an SPA fallback. This is a pre-rendered multi-page website; `wrangler.jsonc` provides the correct static-asset configuration. The included GitHub workflow checks types, tests, builds and dry-runs the Worker; deployment is handled by Cloudflare's Git integration.
+
+## 4. Configure the quote form
+
+Both the client and server remain disabled until configured. An unconfigured API returns HTTP 503, never a false success. The preview shows direct phone/email contact and clearly labels the inactive form.
+
+1. Verify a sending domain with Resend, adding the DNS records it supplies. You can receive enquiries in Gmail, but the sender must belong to your verified domain. Resend is an email delivery service, not a hosted inbox for `contact@...`.
+2. Create a Cloudflare Turnstile widget and allow your deployed hostname. Use the public site key at build time and the secret only on the Worker.
+3. Set build variables in `.env` locally and Cloudflare build settings for Git deployment:
+
+| Variable | Value |
+|---|---|
+| `PUBLIC_SITE_URL` | Exact production origin, e.g. `https://steliteprojects.fr` |
+| `PUBLIC_ENABLE_QUOTES` | `true` only when configuration and policy are ready |
+| `PUBLIC_TURNSTILE_SITE_KEY` | Public Turnstile site key |
+| `PUBLIC_INDEXABLE` | `true` only when ready for public search indexing |
+
+4. Edit non-secret runtime values in `wrangler.jsonc`:
+
+| Variable | Value |
+|---|---|
+| `QUOTES_ENABLED` | `true` |
+| `CONTACT_TO` | Confirmed destination, initially `steliteprojects@gmail.com` |
+| `MAIL_FROM` | e.g. `ST ELITE PROJECTS <contact@steliteprojects.fr>`; verified sender required |
+| `TURNSTILE_HOSTNAME` | Exact host, no scheme/path, e.g. `steliteprojects.fr` |
+
+Use one canonical hostname for enquiries. Redirect other hostnames to it; if you switch from `workers.dev` to a custom domain, update the Turnstile widget and hostname setting together.
+
+5. Add secrets to Cloudflare (commands prompt for values):
+
+```sh
+npx wrangler secret put RESEND_API_KEY
+npx wrangler secret put TURNSTILE_SECRET_KEY
+npm run deploy
+```
+
+Never place secrets in `PUBLIC_*` variables, source files or GitHub commits. For local Wrangler development, use the ignored `.dev.vars` file instead.
+
+6. Send one real test enquiry after launch configuration and verify arrival in the intended inbox, attachment handling and Reply-To. The automated tests mock Turnstile/Resend, so successful real delivery has not been verified in the supplied project.
+
+The Worker checks same-origin POSTs, input lengths, required fields and policy acknowledgement, enabled services, a honeypot, a streamed 10 MiB body limit, photo counts/sizes/signatures, and Turnstile hostname/action. Email is plain text, with normalised attachment filenames. Provider errors remain errors. It does not send an automatic email to the visitor; the visitor sees an on-page confirmation only after the email provider accepts the request.
+
+## 5. Add the company content
+
+| File | What to edit |
+|---|---|
+| `src/data/company.ts` | Phone, email, address, legal fields, logo and hero image |
+| `src/data/services.ts` | Service descriptions and `enabled` switches; solar is off |
+| `src/data/copy.json` | French/English marketing copy |
+| `src/data/projects.ts` | Real projects and bilingual image descriptions |
+| `src/styles/global.css` | Colours, typography, spacing, responsive styles |
+| `src/pages/[lang]/[...page].astro` | Main page structure and draft legal/privacy text |
+| `src/components/Contact.astro` | Contact form and translated status messages |
+
+A service switch removes it from service cards, footer, hero list and contact options, hides associated projects, and rejects that service on the backend. Rebuild and deploy after changing it.
+
+Place approved, compressed images in `public/images/projects/`. Use `.webp`/`.avif` for site photography, descriptive filenames, ideally around 1600px wide and under 300KB. The layout reserves image dimensions and lazy-loads galleries. Automatic source-image compression is not included; optimise supplied originals before adding them. Keep originals in a separate backed-up company folder.
+
+Example project entry (replace with real details and files):
+
+```ts
+{
+  slug: 'tableau-montreuil',
+  city: 'Montreuil',
+  service: 'electricity',
+  title: {fr: 'Rénovation d’un tableau électrique', en: 'Electrical panel renovation'},
+  description: {fr: 'Description réelle des travaux.', en: 'An accurate description of the work.'},
+  images: [
+    {src: '/images/projects/tableau-avant.webp', alt: {fr: 'Tableau avant les travaux', en: 'Panel before renovation'}},
+    {src: '/images/projects/tableau-apres.webp', alt: {fr: 'Tableau après les travaux', en: 'Panel after renovation'}}
+  ]
+}
+```
+
+The project gallery opens original images in a new tab. Add 3–8 photos per real project. Do not publish customer addresses, licence plates, faces or identifying documents without the necessary permission.
+
+The supplied logo is included unchanged at `public/images/st-elite-projects-logo.png`, displayed in the header, footer and homepage. Compact header/footer views crop its lower contact strip using CSS; the full artwork appears on the homepage. Original project photos are still pending. Google Fonts supplies Manrope and DM Sans, with system-font fallbacks. If you prefer no third-party font requests, self-host the licensed font files and replace the CSS import.
+
+## 6. Connect the domain and launch
+
+Add your chosen domain as a Custom Domain for the Worker in Cloudflare. Configure the zone/DNS as directed by Cloudflare; the registrar and hosting provider can be different. Update `PUBLIC_SITE_URL`, allowed Turnstile hostname and runtime `TURNSTILE_HOSTNAME`, rebuild, and verify HTTPS.
+
+Before enabling search indexing and enquiries:
+
+- Confirm published services are insured and offered.
+- Confirm contact details and official company registration data.
+- Complete SIRET, VAT, hosting and mediator details, and finalise the privacy policy with retention and processing details.
+- Replace the empty portfolio with real project photos when ready.
+- Test navigation, FR/EN switching, keyboard use, mobile layout, phone/email links, quote delivery and attachments on real devices.
+- Set `PUBLIC_INDEXABLE=true` and submit `/sitemap.xml` to Search Console.
+
+The legal/privacy pages are explicitly marked drafts, not a completed legal compliance review. They must be finalised before accepting enquiries. The site has no automatic content refresh or third-party review imports.
+
+## Backup and ownership
+
+Keep the repository and Cloudflare account under the company's control, with separate collaborator access. Git stores source/version history; retain a separate copy of original photography. Quote messages/attachments live in the receiving mailbox and email provider according to those services' retention settings. Agree a retention period and mailbox backup policy with the company; there is no hidden database backup or storage service in this project.
+
+## Verification supplied
+
+Type checking, static production build, seven API tests with mocked providers, and a Wrangler deployment dry-run were run during preparation. Real-provider email delivery and browser/device visual QA must be completed in your configured environment. No deployment to your Cloudflare account has been made.
+
+## Company update — Kbis dated 22 September 2026
+
+Updated against the supplied Kbis: company name, SAS status, capital, registered address, SIREN/RCS, EUID, president, registration date and business start date. The supplied logo confirms the existing phone/email. The source Kbis itself is intentionally not bundled or published; personal birth details are not used.
+
+The Kbis does not provide the SIRET, VAT number, opening hours, qualifications, insurance coverage or a personal biography. It records additional activities (photovoltaic, heat pumps/HVAC and interior renovation/finishing), but registration does not confirm current insurance or a decision to advertise them. The public service list remains electricity and plumbing, with solar disabled. Confirm any additional service before enabling/adding it. Legal hosting/mediator details and the privacy policy still need finalisation.

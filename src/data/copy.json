@@ -1,0 +1,172 @@
+{
+  "fr": {
+    "nav": [
+      "Accueil",
+      "Services",
+      "Réalisations",
+      "À propos",
+      "Contact"
+    ],
+    "quote": "Demander un devis",
+    "call": "Nous appeler",
+    "region": "Montreuil, Paris et Île-de-France",
+    "audience": "PARTICULIERS & PROFESSIONNELS",
+    "tag": "Le soin du détail",
+    "headline": "Vos projets.<br>Notre expertise.<br><em>En confiance.</em>",
+    "intro": "ST ÉLITE PROJECTS accompagne particuliers et professionnels en Île-de-France pour leurs travaux d’installation, de rénovation et de dépannage.",
+    "expert": "Nos expertises",
+    "serviceshead": "Des solutions précises.<br>Un travail soigné.",
+    "trust": [
+      "Devis clairs",
+      "Travail soigné",
+      "Suivi direct",
+      "Basée à Montreuil"
+    ],
+    "service": [
+      "Électricité générale",
+      "Plomberie & sanitaire"
+    ],
+    "desc": [
+      "Installation, rénovation, dépannage, mise en sécurité et mise en conformité.",
+      "Installation, rénovation, entretien et dépannage des installations sanitaires et réseaux d’eau."
+    ],
+    "items": [
+      [
+        "Tableaux électriques",
+        "Prises et éclairage",
+        "Circuits spécialisés",
+        "Mise en sécurité / conformité"
+      ],
+      [
+        "Alimentation et évacuation d’eau",
+        "Équipements sanitaires",
+        "Chauffe-eau",
+        "Dépannage plomberie"
+      ]
+    ],
+    "method": "Notre méthode",
+    "methodhead": "De votre besoin<br>à la dernière finition.",
+    "steps": [
+      "Comprendre",
+      "Expliquer",
+      "Réaliser"
+    ],
+    "stepdesc": [
+      "Nous échangeons sur votre projet, vos contraintes et les besoins de votre installation.",
+      "Nous présentons une solution adaptée et un devis clair avant le démarrage des travaux.",
+      "Nous réalisons les travaux avec une attention particulière à la sécurité et aux finitions."
+    ],
+    "cta": "Parlons de votre prochain projet.",
+    "projecttitle": "Nos réalisations",
+    "projectintro": "Découvrez bientôt nos chantiers, leurs détails et les solutions mises en œuvre.",
+    "projectempty": "Les photos de nos réalisations arrivent bientôt.",
+    "projectnote": "Vous souhaitez discuter d’un projet similaire au vôtre ? Contactez-nous pour en parler.",
+    "abouttitle": "Une entreprise de terrain,<br>proche de ses clients.",
+    "aboutintro": "ST ÉLITE PROJECTS est une entreprise du bâtiment basée à Montreuil. Notre objectif est de proposer des solutions techniques claires et adaptées, avec un suivi direct du chantier.",
+    "contacttitle": "Tout commence<br>par une conversation.",
+    "contactintro": "Un projet d’installation, de rénovation ou de dépannage ? Parlons de votre besoin.",
+    "formtitle": "Votre demande de devis",
+    "draft": "Aperçu du formulaire — l’envoi et l’ajout de photos seront activés avant le lancement. Vous pouvez déjà nous contacter par téléphone ou par e-mail.",
+    "labels": [
+      "Nom et prénom",
+      "Téléphone",
+      "E-mail",
+      "Ville / code postal",
+      "Type de travaux",
+      "Description du projet"
+    ],
+    "choose": "Choisir un service",
+    "send": "Envoi bientôt disponible",
+    "privacy": "Politique de confidentialité",
+    "legal": "Mentions légales",
+    "phone": "Téléphone",
+    "email": "E-mail",
+    "zone": "Zone d’intervention",
+    "address": "Siège social"
+  },
+  "en": {
+    "nav": [
+      "Home",
+      "Services",
+      "Projects",
+      "About",
+      "Contact"
+    ],
+    "quote": "Request a quote",
+    "call": "Call us",
+    "region": "Montreuil, Paris and Île-de-France",
+    "audience": "HOMES & BUSINESSES",
+    "tag": "Precision in every detail",
+    "headline": "Your project.<br>Our expertise.<br><em>Built on trust.</em>",
+    "intro": "ST ÉLITE PROJECTS supports homeowners and businesses in the Paris region with installation, renovation and repairs.",
+    "expert": "Our expertise",
+    "serviceshead": "Practical solutions.<br>Careful workmanship.",
+    "trust": [
+      "Clear quotations",
+      "Careful workmanship",
+      "Direct support",
+      "Based in Montreuil"
+    ],
+    "service": [
+      "Electrical services",
+      "Plumbing & sanitary installations"
+    ],
+    "desc": [
+      "Installation, renovation, repairs, safety improvements and compliance work.",
+      "Installation, renovation, maintenance and repairs for sanitary fittings and water systems."
+    ],
+    "items": [
+      [
+        "Electrical panels",
+        "Sockets and lighting",
+        "Dedicated circuits",
+        "Safety and compliance"
+      ],
+      [
+        "Water supply and drainage",
+        "Sanitary fittings",
+        "Water heaters",
+        "Plumbing repairs"
+      ]
+    ],
+    "method": "Our approach",
+    "methodhead": "From your first idea<br>to the final detail.",
+    "steps": [
+      "Understand",
+      "Explain",
+      "Deliver"
+    ],
+    "stepdesc": [
+      "We discuss your project, its constraints and the needs of your installation.",
+      "We explain a suitable solution and provide a clear quotation before work begins.",
+      "We carry out the work with attention to safety, finishing and a tidy worksite."
+    ],
+    "cta": "Let’s talk about your next project.",
+    "projecttitle": "Our projects",
+    "projectintro": "A closer look at our work, the details and the solutions behind it — coming soon.",
+    "projectempty": "Our project photographs are coming soon.",
+    "projectnote": "Want to discuss work similar to your project? Get in touch to talk it through.",
+    "abouttitle": "Practical expertise.<br>A personal approach.",
+    "aboutintro": "ST ÉLITE PROJECTS is a building services company based in Montreuil. Our aim is to offer clear, practical technical solutions with direct oversight of your project.",
+    "contacttitle": "It starts with<br>a conversation.",
+    "contactintro": "Planning an installation, renovation or repair? Tell us what you need.",
+    "formtitle": "Your quote request",
+    "draft": "Form preview — submission and photo uploads will be enabled before launch. You can already contact us by phone or email.",
+    "labels": [
+      "Full name",
+      "Phone",
+      "Email",
+      "City / postcode",
+      "Type of work",
+      "Project description"
+    ],
+    "choose": "Choose a service",
+    "send": "Submission coming soon",
+    "privacy": "Privacy policy",
+    "legal": "Legal notice",
+    "phone": "Phone",
+    "email": "Email",
+    "zone": "Service area",
+    "address": "Registered office"
+  }
+}

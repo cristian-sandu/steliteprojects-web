@@ -1,0 +1,33 @@
+---
+import {company,href,type Lang} from '../data/company';
+import {activeServices} from '../data/services';
+import copy from '../data/copy.json';
+const {lang}=Astro.props as {lang:Lang};const d=copy[lang];
+const key=import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
+const enabled=import.meta.env.PUBLIC_ENABLE_QUOTES==='true' && Boolean(key);
+---
+<section class="section"><div class="wrap contact-grid"><div><div class="contact-detail"><small>{d.phone}</small><a href={`tel:${company.phoneHref}`}>{company.phone}</a></div><div class="contact-detail"><small>{d.email}</small><a href={`mailto:${company.email}`}>{company.email}</a></div><div class="contact-detail"><small>{d.zone}</small>{d.region}</div><div class="contact-detail"><small>{d.address}</small>{company.address}<br/>{company.city}</div></div>
+<form class="form" id="quote-form" data-lang={lang} data-enabled={String(enabled)} method="post" action="/api/quote" enctype="multipart/form-data"><h2>{d.formtitle}</h2>{!enabled&&<p class="note">{d.draft}</p>}<noscript><p>{lang==='fr'?'Activez JavaScript pour envoyer le formulaire, ou contactez-nous directement.':'Enable JavaScript to submit, or contact us directly.'}</p></noscript><input type="hidden" name="lang" value={lang}/><div class="honey" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"/></label></div>
+<div class="fields"><label>{d.labels[0]} *<input name="name" autocomplete="name" required maxlength="120"/></label><label>{d.labels[1]} *<input name="phone" type="tel" autocomplete="tel" required maxlength="40"/></label><label>{d.labels[2]}<input name="email" type="email" autocomplete="email" maxlength="254"/></label><label>{d.labels[3]} *<input name="city" autocomplete="address-level2" required maxlength="120"/></label><label class="full">{d.labels[4]} *<select name="service" id="service" required><option value="">{d.choose}</option>{activeServices.map(s=><option value={s.id}>{s[lang].name}</option>)}</select></label><label class="full">{d.labels[5]} *<textarea name="description" required minlength="10" maxlength="5000"/></label><label class="full">{lang==='fr'?'Photos (facultatif)':'Photos (optional)'}<input name="photos" type="file" multiple accept="image/jpeg,image/png,image/webp"/><span class="note">{lang==='fr'?'5 photos maximum · JPEG, PNG, WebP · 2 Mo/photo · 8 Mo au total':'Up to 5 photos · JPEG, PNG, WebP · 2 MB each · 8 MB total'}</span></label></div>
+<label class="consent"><input type="checkbox" name="consent" value="yes" required/><span>{lang==='fr'?'J’ai lu la':'I have read the'} <a href={href(lang,'privacy')}>{d.privacy.toLowerCase()}</a>.</span></label>
+{enabled&&<div class="cf-turnstile" data-sitekey={key} data-action="quote" data-theme="light"/>}
+<button class="button" type="submit" disabled={!enabled}>{enabled?(lang==='fr'?'Envoyer ma demande':'Send my request'):d.send}</button><p id="form-status" role="status" aria-live="polite" class="note"/>
+</form></div></section>
+{enabled&&<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
+<script>
+const form=document.querySelector<HTMLFormElement>('#quote-form');
+if(form){
+ const select=form.querySelector<HTMLSelectElement>('#service');const chosen=new URLSearchParams(location.search).get('service');
+ if(select&&chosen&&Array.from(select.options).some(o=>o.value===chosen))select.value=chosen;
+ form.addEventListener('submit',async e=>{
+ e.preventDefault();if(form.dataset.enabled!=='true')return;
+ const status=document.getElementById('form-status')!;const button=form.querySelector<HTMLButtonElement>('button[type=submit]')!;const fr=form.dataset.lang==='fr';
+ const data=new FormData(form);const photos=data.getAll('photos').filter((v):v is File=>v instanceof File&&v.size>0);
+ if(photos.length>5||photos.some(f=>f.size>2*1024*1024)||photos.reduce((n,f)=>n+f.size,0)>8*1024*1024){status.textContent=fr?'Vérifiez le nombre et la taille des photos.':'Check the number and size of your photos.';return;}
+ button.disabled=true;status.textContent=fr?'Envoi en cours…':'Sending…';
+ try{const response=await fetch('/api/quote',{method:'POST',body:data});const result=await response.json();if(!response.ok)throw new Error(result.code||'send_failed');status.textContent=fr?'Merci ! Votre demande a bien été envoyée.':'Thank you! Your request has been sent.';form.reset();}
+ catch{status.textContent=fr?'La demande n’a pas pu être envoyée. Réessayez ou contactez-nous directement.':'Your request could not be sent. Please retry or contact us directly.';}
+ finally{button.disabled=false;(window as Window & {turnstile?:{reset:()=>void}}).turnstile?.reset();}
+ });
+}
+</script>

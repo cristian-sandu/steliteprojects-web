@@ -1,0 +1,7 @@
+---
+import {activeServices} from '../data/services';
+import {href,type Lang} from '../data/company';
+import copy from '../data/copy.json';
+const {lang}=Astro.props as {lang:Lang};
+---
+<div class="grid">{activeServices.map((service,i)=><article class="service"><span class="number">{String(i+1).padStart(2,'0')} / ST ÉLITE</span><h3>{service[lang].name}</h3><p>{service[lang].description}</p><ul>{service[lang].items.map(item=><li>{item}</li>)}</ul><a class="textlink" href={`${href(lang,'contact')}?service=${service.id}`}>{copy[lang].quote}</a></article>)}</div>

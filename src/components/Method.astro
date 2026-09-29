@@ -1,0 +1,6 @@
+---
+import type {Lang} from '../data/company';
+import copy from '../data/copy.json';
+const {lang}=Astro.props as {lang:Lang};const d=copy[lang];
+---
+<section class="section soft"><div class="wrap"><div class="eyebrow">{d.method}</div><h2 set:html={d.methodhead}/><div class="process">{d.steps.map((step,i)=><article><span class="number">0{i+1}</span><h3>{step}</h3><p>{d.stepdesc[i]}</p></article>)}</div></div></section>

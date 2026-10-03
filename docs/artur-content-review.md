@@ -32,3 +32,11 @@ Reviewed W3C guidance on [text contrast](https://www.w3.org/WAI/WCAG22/Understan
 Direction: charcoal (#252522), warm ivory (#faf9f5), muted gold (#c6ad69), dark bronze links (#786126). Restrained technical line icons, structured service cards, subtle grid detail and clear mobile contact actions. Gold uses dark text; small text on light backgrounds uses dark bronze. Original logo remains intact.
 
 Figma is available as an optional connector but is not connected. It would help maintain an editable design file or collaborate with a designer; it is not required to implement and browser-review this Astro redesign.
+
+## French/English and responsive review
+
+Reviewed all translation dictionary entries, seven service descriptions/item lists, inline legal/privacy/about text, form labels/status messages, accessibility labels and the bilingual 404 page. Corrected “particuliers” to private clients rather than narrowing it to homeowners; translated English VAT/share-capital labels; used the UK term “hot water cylinders”; clarified reversible air conditioning; removed the added tidy-worksite claim from the English method text. Disabled-form wording now accurately describes the current sending status in both languages. Native company names, registry identifiers and French place names remain unchanged.
+
+Validated 16 HTML routes at 19 viewport configurations (304 combinations): widths 320, 360, 390, 430, 600, 760, 761, 768, 820, 900, 901, 1024, 1100, 1101, 1280, 1440 and 1920, plus 844×390 and 1024×768 landscape. No page/heading/control overflow or uncaught JavaScript errors. Both languages retain equivalent service options and switch to the matching page. Screenshots reviewed for the English home and both contact pages. Representative English home/contact and French legal pages also passed 200% text-enlargement checks.
+
+The fixed mobile contact bar reserves its actual height (including wrapping and safe-area padding), and the menu scrolls on short screens. Long headings can wrap; tablet contact fields use a single-column layout where appropriate. Type checking, production build and all seven API tests passed. These are Chromium-based browser checks; physical Safari/Firefox device testing has not been performed.

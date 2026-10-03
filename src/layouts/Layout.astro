@@ -24,6 +24,11 @@ const absolute=(l:Lang)=>new URL(href(l,page),Astro.site).href;
 <script>
 const menu=document.querySelector<HTMLButtonElement>('.menu');
 menu?.addEventListener('click',()=>{const open=document.getElementById('mobile-nav')?.classList.toggle('open');menu.setAttribute('aria-expanded',String(open));});
+const mobileBar=document.querySelector<HTMLElement>('.mobile-bar');
+if(mobileBar){
+ const updateBarSpace=()=>document.documentElement.style.setProperty('--mobile-bar-space',`${mobileBar.getBoundingClientRect().height+16}px`);
+ new ResizeObserver(updateBarSpace).observe(mobileBar);updateBarSpace();
+}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.getElementById('mobile-nav')?.classList.remove('open');menu?.setAttribute('aria-expanded','false');}});
 </script>
 </body></html>

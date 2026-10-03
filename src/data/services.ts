@@ -80,7 +80,7 @@ export const services = [
       ]
     },
     "en": {
-      "name": "Hot water heaters",
+      "name": "Hot water cylinders",
       "description": "Water heater installation and replacement for your domestic hot water needs.",
       "items": [
         "Water heater installation",
@@ -108,7 +108,7 @@ export const services = [
       "items": [
         "Air-to-water heat pumps",
         "Air-to-air heat pumps",
-        "Reversible air conditioning",
+        "Reversible air conditioning (heating and cooling)",
         "Maintenance and repairs"
       ]
     }

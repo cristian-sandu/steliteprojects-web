@@ -10,6 +10,11 @@ export const company = {
 export type Lang = 'fr' | 'en';
 export const defaultLanguage: Lang = 'fr';
 export const languages: Lang[] = ['fr', 'en'];
-export const pages = ['', 'services', 'projects', 'about', 'contact', 'legal', 'privacy'] as const;
+export const pages = ['', 'services', 'about', 'projects', 'contact', 'legal', 'privacy'] as const;
 export type Page = typeof pages[number];
 export const href = (lang: Lang, page: string = '') => lang === defaultLanguage && !page ? '/' : `/${lang}/${page ? page + '/' : ''}`;
+
+export const serviceDepartments = [
+ 'Paris (75)', 'Seine-et-Marne (77)', 'Yvelines (78)', 'Essonne (91)',
+ 'Hauts-de-Seine (92)', 'Seine-Saint-Denis (93)', 'Val-de-Marne (94)', 'Val-d’Oise (95)',
+];

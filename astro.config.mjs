@@ -1,2 +1,2 @@
 import { defineConfig } from 'astro/config';
-export default defineConfig({site:process.env.PUBLIC_SITE_URL || 'http://localhost:4321',output:'static',trailingSlash:'always'});
+export default defineConfig({site:process.env.PUBLIC_SITE_URL || 'https://steliteprojects-web.cristian-sandu-connect.workers.dev',output:'static',trailingSlash:'always'});

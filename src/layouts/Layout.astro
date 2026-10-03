@@ -7,7 +7,7 @@ import copy from '../data/copy.json';
 interface Props {lang:Lang; page:Page; title:string}
 const {lang,page,title}=Astro.props;
 const d=copy[lang];
-const navPages=['','services','projects','about','contact'];
+const navPages=['','services','about','projects','contact'];
 const indexable=import.meta.env.PUBLIC_INDEXABLE === 'true';
 const absolute=(l:Lang)=>new URL(href(l,page),Astro.site).href;
 ---

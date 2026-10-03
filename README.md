@@ -191,3 +191,7 @@ The Kbis does not provide the SIRET, VAT number, opening hours, qualifications, 
 ## Artur’s October content refinements
 
 The Romanian website brief supplies the SIRET, French company/about/contact copy and heating/air-conditioning services. Later Messenger messages take precedence for the homepage headline, free quotations, the lower slogan, hero service summary and seven-category service overview. English content follows the French changes. The Kbis confirms company registration details; no personal birth information is published. VAT and unsupported RGE/QualiPAC/IRVE/refrigerant certifications are not invented. The form remains disabled until its provider configuration is complete.
+
+## Logo colour refinement
+
+The site uses charcoal, warm ivory and muted gold, with dark bronze links for readable contrast. The design keeps Artur’s requested headline, hero summary, seven-service overview and lower slogan. See `docs/artur-content-review.md` for the source-by-source review, remaining content/configuration items and design references. Production metadata defaults to the current Worker URL; `PUBLIC_SITE_URL` can override it when a custom domain is added.

@@ -3,8 +3,8 @@
     "nav": [
       "Accueil",
       "Nos services",
-      "Réalisations",
       "À propos",
+      "Réalisations",
       "Contact"
     ],
     "quote": "Demander un devis gratuit",
@@ -67,14 +67,15 @@
       "Électricité générale",
       "Dépannage"
     ],
-    "slogan": "Vos projets. Notre expertise. En confiance."
+    "slogan": "Vos projets. Notre expertise. En confiance.",
+    "serviceDetails": "Des interventions précises. Un travail soigné."
   },
   "en": {
     "nav": [
       "Home",
       "Services",
-      "Projects",
       "About",
+      "Projects",
       "Contact"
     ],
     "quote": "Request a free quote",
@@ -137,6 +138,7 @@
       "Electrical services",
       "Repairs"
     ],
-    "slogan": "Your projects. Our expertise. Built on trust."
+    "slogan": "Your projects. Our expertise. Built on trust.",
+    "serviceDetails": "Precise work. Careful workmanship."
   }
 }

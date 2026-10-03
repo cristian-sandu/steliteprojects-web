@@ -1,0 +1,14 @@
+---
+interface Props {service:string}
+const {service}=Astro.props;
+const paths: Record<string,string[]> = {
+ electricity:['M13 2 5 14h6l-1 8 9-13h-7l1-7Z'],
+ plumbing:['M12 3C10 7 5 11 5 15a7 7 0 0 0 14 0c0-4-5-8-7-12Z','M9 16a3 3 0 0 0 3 3'],
+ repairs:['M14 6a5 5 0 0 0-6 6L3 17a3 3 0 0 0 4 4l5-5a5 5 0 0 0 6-6l-4 3-3-3 3-4Z'],
+ 'water-heaters':['M7 5h10v14H7Z','M9 2v3m6-3v3M9 19v3m6-3v3','M10 9h4m-4 4h4'],
+ 'heat-pumps':['M3 5h18v14H3Z','M12 8v8m-4-4h8m-7-3 6 6m-6 0 6-6','M6 22v-3m12 3v-3'],
+ solar:['M4 10h16l2 10H2l2-10Z','M8 10 7 20m9-10 1 10M3 15h18','M12 2v2M5 4l2 2m12-2-2 2'],
+ charging:['M6 4h10v18H6Z','M9 7h4v4H9Z','M16 13h2a2 2 0 0 1 2 2v3a1 1 0 0 0 2 0V8l-3-3','M4 22h14'],
+};
+---
+<svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">{(paths[service]||paths.electricity).map(d=><path d={d}/>)}</svg>

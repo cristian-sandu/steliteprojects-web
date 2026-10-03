@@ -1,3 +1,5 @@
 ---
-return Astro.redirect('/fr/');
+import SitePage from '../components/SitePage.astro';
+import {defaultLanguage} from '../data/company';
 ---
+<SitePage lang={defaultLanguage} page=""/>

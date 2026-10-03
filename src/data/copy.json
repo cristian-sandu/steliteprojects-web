@@ -2,47 +2,25 @@
   "fr": {
     "nav": [
       "Accueil",
-      "Services",
+      "Nos services",
       "Réalisations",
       "À propos",
       "Contact"
     ],
-    "quote": "Demander un devis",
+    "quote": "Demander un devis gratuit",
     "call": "Nous appeler",
     "region": "Montreuil, Paris et Île-de-France",
     "audience": "PARTICULIERS & PROFESSIONNELS",
     "tag": "Le soin du détail",
-    "headline": "Vos projets.<br>Notre expertise.<br><em>En confiance.</em>",
-    "intro": "ST ÉLITE PROJECTS accompagne particuliers et professionnels en Île-de-France pour leurs travaux d’installation, de rénovation et de dépannage.",
-    "expert": "Nos expertises",
-    "serviceshead": "Des solutions précises.<br>Un travail soigné.",
+    "headline": "Électricité & Plomberie<br>en Île-de-France",
+    "intro": "ST ÉLITE PROJECTS accompagne les particuliers et les professionnels dans leurs travaux d’installation, de rénovation et de dépannage. Basée à Montreuil, notre équipe intervient à Paris et en Île-de-France.",
+    "expert": "Nos services",
+    "serviceshead": "Nos services",
     "trust": [
       "Devis clairs",
       "Travail soigné",
       "Suivi direct",
       "Basée à Montreuil"
-    ],
-    "service": [
-      "Électricité générale",
-      "Plomberie & sanitaire"
-    ],
-    "desc": [
-      "Installation, rénovation, dépannage, mise en sécurité et mise en conformité.",
-      "Installation, rénovation, entretien et dépannage des installations sanitaires et réseaux d’eau."
-    ],
-    "items": [
-      [
-        "Tableaux électriques",
-        "Prises et éclairage",
-        "Circuits spécialisés",
-        "Mise en sécurité / conformité"
-      ],
-      [
-        "Alimentation et évacuation d’eau",
-        "Équipements sanitaires",
-        "Chauffe-eau",
-        "Dépannage plomberie"
-      ]
     ],
     "method": "Notre méthode",
     "methodhead": "De votre besoin<br>à la dernière finition.",
@@ -62,9 +40,9 @@
     "projectempty": "Les photos de nos réalisations arrivent bientôt.",
     "projectnote": "Vous souhaitez discuter d’un projet similaire au vôtre ? Contactez-nous pour en parler.",
     "abouttitle": "Une entreprise de terrain,<br>proche de ses clients.",
-    "aboutintro": "ST ÉLITE PROJECTS est une entreprise du bâtiment basée à Montreuil. Notre objectif est de proposer des solutions techniques claires et adaptées, avec un suivi direct du chantier.",
+    "aboutintro": "ST ÉLITE PROJECTS est une entreprise basée à Montreuil spécialisée dans les travaux d’électricité, de plomberie, de chauffage et de climatisation. Notre équipe dispose de plusieurs années d’expérience sur le terrain, notamment dans les installations électriques, le dépannage, la mise en conformité et les installations photovoltaïques. Nous intervenons auprès des particuliers et des professionnels en Île-de-France.",
     "contacttitle": "Tout commence<br>par une conversation.",
-    "contactintro": "Un projet d’installation, de rénovation ou de dépannage ? Parlons de votre besoin.",
+    "contactintro": "Vous avez un projet ou besoin d’une intervention ? Contactez ST ÉLITE PROJECTS pour nous présenter votre besoin et demander un devis.",
     "formtitle": "Votre demande de devis",
     "draft": "Aperçu du formulaire — l’envoi et l’ajout de photos seront activés avant le lancement. Vous pouvez déjà nous contacter par téléphone ou par e-mail.",
     "labels": [
@@ -82,7 +60,14 @@
     "phone": "Téléphone",
     "email": "E-mail",
     "zone": "Zone d’intervention",
-    "address": "Siège social"
+    "address": "Siège social",
+    "heroWork": "Installation · Rénovation · Dépannage",
+    "heroServices": [
+      "Plomberie",
+      "Électricité générale",
+      "Dépannage"
+    ],
+    "slogan": "Vos projets. Notre expertise. En confiance."
   },
   "en": {
     "nav": [
@@ -92,42 +77,20 @@
       "About",
       "Contact"
     ],
-    "quote": "Request a quote",
+    "quote": "Request a free quote",
     "call": "Call us",
     "region": "Montreuil, Paris and Île-de-France",
     "audience": "HOMES & BUSINESSES",
     "tag": "Precision in every detail",
-    "headline": "Your project.<br>Our expertise.<br><em>Built on trust.</em>",
-    "intro": "ST ÉLITE PROJECTS supports homeowners and businesses in the Paris region with installation, renovation and repairs.",
-    "expert": "Our expertise",
-    "serviceshead": "Practical solutions.<br>Careful workmanship.",
+    "headline": "Electrical & Plumbing Services<br>in Île-de-France",
+    "intro": "ST ÉLITE PROJECTS supports homeowners and businesses with installation, renovation and repairs. Based in Montreuil, our team works throughout Paris and Île-de-France.",
+    "expert": "Our services",
+    "serviceshead": "Our services",
     "trust": [
       "Clear quotations",
       "Careful workmanship",
       "Direct support",
       "Based in Montreuil"
-    ],
-    "service": [
-      "Electrical services",
-      "Plumbing & sanitary installations"
-    ],
-    "desc": [
-      "Installation, renovation, repairs, safety improvements and compliance work.",
-      "Installation, renovation, maintenance and repairs for sanitary fittings and water systems."
-    ],
-    "items": [
-      [
-        "Electrical panels",
-        "Sockets and lighting",
-        "Dedicated circuits",
-        "Safety and compliance"
-      ],
-      [
-        "Water supply and drainage",
-        "Sanitary fittings",
-        "Water heaters",
-        "Plumbing repairs"
-      ]
     ],
     "method": "Our approach",
     "methodhead": "From your first idea<br>to the final detail.",
@@ -147,9 +110,9 @@
     "projectempty": "Our project photographs are coming soon.",
     "projectnote": "Want to discuss work similar to your project? Get in touch to talk it through.",
     "abouttitle": "Practical expertise.<br>A personal approach.",
-    "aboutintro": "ST ÉLITE PROJECTS is a building services company based in Montreuil. Our aim is to offer clear, practical technical solutions with direct oversight of your project.",
+    "aboutintro": "ST ÉLITE PROJECTS is a Montreuil-based company specialising in electrical work, plumbing, heating and air conditioning. Our team has several years of hands-on experience, including electrical installations, repairs, compliance work and photovoltaic installations. We work with homeowners and businesses throughout Île-de-France.",
     "contacttitle": "It starts with<br>a conversation.",
-    "contactintro": "Planning an installation, renovation or repair? Tell us what you need.",
+    "contactintro": "Planning a project or need assistance? Contact ST ÉLITE PROJECTS to discuss your needs and request a quote.",
     "formtitle": "Your quote request",
     "draft": "Form preview — submission and photo uploads will be enabled before launch. You can already contact us by phone or email.",
     "labels": [
@@ -167,6 +130,13 @@
     "phone": "Phone",
     "email": "Email",
     "zone": "Service area",
-    "address": "Registered office"
+    "address": "Registered office",
+    "heroWork": "Installation · Renovation · Repairs",
+    "heroServices": [
+      "Plumbing",
+      "Electrical services",
+      "Repairs"
+    ],
+    "slogan": "Your projects. Our expertise. Built on trust."
   }
 }

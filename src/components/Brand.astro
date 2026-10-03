@@ -1,0 +1,6 @@
+---
+import {company} from '../data/company';
+interface Props {hero?:boolean}
+const {hero=false}=Astro.props;
+---
+<div class:list={["brand-art", {"brand-art-hero":hero}]}><img src={company.logo} alt={company.name} width="1254" height="1254" loading={hero?"eager":undefined} fetchpriority={hero?"high":undefined}/></div>

@@ -1,12 +1,12 @@
 # ST ÉLITE PROJECTS
 
-Bilingual French/English Astro + TypeScript website for ST ÉLITE PROJECTS, Montreuil. Includes the approved anthracite/blue design, responsive navigation, mobile call/quote bar, service pages, project gallery support, contact form, and draft legal pages.
+Bilingual French/English Astro + TypeScript website for ST ÉLITE PROJECTS, Montreuil. Includes the approved anthracite/blue design, responsive navigation, mobile call/quote bar, seven service categories, project gallery support, contact form, and draft legal pages.
 
 **This is a standalone GitHub/Cloudflare project.** It contains no ChatGPT Sites identity, repository credentials, account IDs, or API keys. The downloadable project can be deployed independently of the ChatGPT Sites preview.
 
 ## Stack
 
-- Astro 7, static output: `/fr/` and `/en/`, with `/` redirecting to French.
+- Astro 7, static output: `/fr/` and `/en/`, with `/` serving the French homepage directly.
 - TypeScript and custom responsive CSS, shared Astro layouts/components.
 - Cloudflare Worker for `/api/quote`; static pages served through Workers Static Assets.
 - Cloudflare Turnstile, validated server-side, and Resend for transactional email.
@@ -128,7 +128,7 @@ The Worker checks same-origin POSTs, input lengths, required fields and policy a
 | File | What to edit |
 |---|---|
 | `src/data/company.ts` | Phone, email, address, legal fields, logo and hero image |
-| `src/data/services.ts` | Service descriptions and `enabled` switches; solar is off |
+| `src/data/services.ts` | Service descriptions and `enabled` switches |
 | `src/data/copy.json` | French/English marketing copy |
 | `src/data/projects.ts` | Real projects and bilingual image descriptions |
 | `src/styles/global.css` | Colours, typography, spacing, responsive styles |
@@ -157,7 +157,7 @@ Example project entry (replace with real details and files):
 
 The project gallery opens original images in a new tab. Add 3–8 photos per real project. Do not publish customer addresses, licence plates, faces or identifying documents without the necessary permission.
 
-The supplied logo is included unchanged at `public/images/st-elite-projects-logo.png`, displayed in the header, footer and homepage. Compact header/footer views crop its lower contact strip using CSS; the full artwork appears on the homepage. Original project photos are still pending. Google Fonts supplies Manrope and DM Sans, with system-font fallbacks. If you prefer no third-party font requests, self-host the licensed font files and replace the CSS import.
+The selected logo is included unchanged at `public/images/st-elite-projects-signature.png`, displayed in the header, footer and homepage. CSS isolates the main black-and-gold logo from its presentation board. Original project photos are still pending. The selected 02 — Signature logo is displayed from its original presentation artwork through a CSS viewport. Google Fonts supplies Manrope and DM Sans, with system-font fallbacks. If you prefer no third-party font requests, self-host the licensed font files and replace the CSS import.
 
 ## 6. Connect the domain and launch
 
@@ -186,4 +186,8 @@ Type checking, static production build, seven API tests with mocked providers, a
 
 Updated against the supplied Kbis: company name, SAS status, capital, registered address, SIREN/RCS, EUID, president, registration date and business start date. The supplied logo confirms the existing phone/email. The source Kbis itself is intentionally not bundled or published; personal birth details are not used.
 
-The Kbis does not provide the SIRET, VAT number, opening hours, qualifications, insurance coverage or a personal biography. It records additional activities (photovoltaic, heat pumps/HVAC and interior renovation/finishing), but registration does not confirm current insurance or a decision to advertise them. The public service list remains electricity and plumbing, with solar disabled. Confirm any additional service before enabling/adding it. Legal hosting/mediator details and the privacy policy still need finalisation.
+The Kbis does not provide the SIRET, VAT number, opening hours, qualifications, insurance coverage or a personal biography. It records additional activities (photovoltaic, heat pumps/HVAC and interior renovation/finishing), but registration does not confirm current insurance or a decision to advertise them. The later website content brief and Artur’s messages request electricity, plumbing, repairs, water heaters, heat pumps, photovoltaics and charging points. These are now advertised without unsupported certification claims. Legal hosting/mediator details and the privacy policy still need finalisation.
+
+## Artur’s October content refinements
+
+The Romanian website brief supplies the SIRET, French company/about/contact copy and heating/air-conditioning services. Later Messenger messages take precedence for the homepage headline, free quotations, the lower slogan, hero service summary and seven-category service overview. English content follows the French changes. The Kbis confirms company registration details; no personal birth information is published. VAT and unsupported RGE/QualiPAC/IRVE/refrigerant certifications are not invented. The form remains disabled until its provider configuration is complete.

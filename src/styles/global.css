@@ -243,3 +243,13 @@ footer .footer-grid>div:last-child>a { display: inline-flex; align-items: center
  .hero-grid { gap: 0; padding-bottom: 32px; }
  .form>.actions { gap: 20px; }
 }
+
+/* Clearly distinguish direct contact, company details and the enquiry form. */
+.direct-contact { display: flex; align-items: center; justify-content: space-between; gap: 32px; padding: 28px 32px; margin-bottom: 48px; border: 1px solid var(--line); border-left: 3px solid var(--gold); background: #fffefa; }
+.direct-contact h2, .contact-heading { font-size: 28px; margin: 0 0 12px; }
+.direct-contact p { margin: 0; color: var(--muted); max-width: 560px; }
+.direct-contact .actions { margin: 0; flex-shrink: 0; }
+.contact-grid { align-items: start; }
+.form-intro { margin-bottom: 24px; }
+@media (max-width: 1000px) { .direct-contact { flex-direction: column; align-items: flex-start; gap: 20px; } }
+@media (max-width: 600px) { .direct-contact { padding: 24px; margin-bottom: 32px; } .direct-contact h2, .contact-heading, .form h2 { font-size: 24px; } .direct-contact .actions { gap: 16px; } }

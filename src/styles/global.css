@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
-
 :root {
   --ink: #252522;
   --muted: #64645b;
@@ -229,4 +227,19 @@ footer .links a { display: block; width: fit-content; padding: 5px 0; }
   .department-list { grid-template-columns: 1fr; }
   .hero-services { gap: 8px 10px; }
   .hero h1 { font-size: 30px; }
+}
+
+/* Design review: quicker service discovery and consistent contact controls. */
+html { scroll-padding-bottom: var(--mobile-bar-space, 24px); }
+.header-phone { display: none; align-items: center; min-height: 44px; white-space: nowrap; font-size: 13px; font-weight: 600; color: var(--accent); }
+.service { display: flex; flex-direction: column; }
+.service .textlink { align-self: flex-start; margin-top: auto; }
+footer .footer-grid>div:last-child>a { display: inline-flex; align-items: center; min-height: 44px; }
+.fine a { display: inline-flex; align-items: center; min-height: 36px; }
+.mobile-nav a[aria-current=page] { color: var(--accent); font-weight: 700; }
+@media (min-width: 1280px) { .header-phone { display: inline-flex; } .tools { gap: 14px; } }
+@media (max-width: 760px) {
+ .hero-brand { display: none; }
+ .hero-grid { gap: 0; padding-bottom: 32px; }
+ .form>.actions { gap: 20px; }
 }

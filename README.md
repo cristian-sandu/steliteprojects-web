@@ -1,6 +1,6 @@
 # ST ÉLITE PROJECTS
 
-Bilingual French/English Astro + TypeScript website for ST ÉLITE PROJECTS, Montreuil. Includes the approved anthracite/blue design, responsive navigation, mobile call/quote bar, seven service categories, project gallery support, contact form, and draft legal pages.
+Bilingual French/English Astro + TypeScript website for ST ÉLITE PROJECTS, Montreuil. Includes the approved charcoal, ivory and muted gold design, responsive navigation, mobile call/quote bar, seven service categories, project gallery support, contact form, and draft legal pages.
 
 **This is a standalone GitHub/Cloudflare project.** It contains no ChatGPT Sites identity, repository credentials, account IDs, or API keys. The downloadable project can be deployed independently of the ChatGPT Sites preview.
 
@@ -9,9 +9,9 @@ Bilingual French/English Astro + TypeScript website for ST ÉLITE PROJECTS, Mont
 - Astro 7, static output: `/fr/` and `/en/`, with `/` serving the French homepage directly.
 - TypeScript and custom responsive CSS, shared Astro layouts/components.
 - Cloudflare Worker for `/api/quote`; static pages served through Workers Static Assets.
-- Cloudflare Turnstile, validated server-side, and Resend for transactional email.
+- Cloudflare Turnstile, validated server-side, and Cloudflare Email Service for transactional email.
 - Photos delivered as private email attachments to the company, not stored publicly or in R2. Maximum 5, JPEG/PNG/WebP, 2 MiB each, 8 MiB total. R2 is unnecessary for this initial workflow.
-- No database, CMS, analytics, advertising scripts or admin login.
+- No enquiry database, CMS, analytics, advertising scripts or admin login. A daily SQLite Durable Object stores only quota counters and daily IP-derived identifiers.
 
 ## 1. Run locally
 
@@ -85,43 +85,19 @@ Do not choose an SPA fallback. This is a pre-rendered multi-page website; `wrang
 
 ## 4. Configure the quote form
 
-Both the client and server remain disabled until configured. An unconfigured API returns HTTP 503, never a false success. The preview shows direct phone/email contact and clearly labels the inactive form.
+The production form uses native Cloudflare Email Service with a fixed verified destination, Cloudflare Turnstile, and a SQLite Durable Object quota ledger. No Resend account or API key is required.
 
-1. Verify a sending domain with Resend, adding the DNS records it supplies. You can receive enquiries in Gmail, but the sender must belong to your verified domain. Resend is an email delivery service, not a hosted inbox for `contact@...`.
-2. Create a Cloudflare Turnstile widget and allow your deployed hostname. Use the public site key at build time and the secret only on the Worker.
-3. Set build variables in `.env` locally and Cloudflare build settings for Git deployment:
+- Current temporary recipient: `cristian.sandu.connect@gmail.com`. Public contact links continue to use `steliteprojects@gmail.com`.
+- Sender: `devis@forms.steliteprojects.com`; Email Routing is enabled on the dedicated forms subdomain.
+- Workers Free is confirmed by the account owner's dashboard screenshot. Cloudflare documents sending to verified destinations as free on all plans. Do not upgrade Workers or enable arbitrary-recipient sending for this form.
+- Limit: 50 reserved email attempts per UTC day globally; three per IP per day, at least ten minutes apart. Failed provider sends consume a slot conservatively. Quota outages reject submission. Daily identifiers are purged by an alarm 48 hours after the day's start.
+- Turnstile must return success, action `quote`, and the exact runtime `TURNSTILE_HOSTNAME`. Tokens are single-use. `TURNSTILE_SECRET_KEY` lives only in the Worker's secret store.
+- Build variables: `PUBLIC_ENABLE_QUOTES=true`, `PUBLIC_TURNSTILE_SITE_KEY` set to the production public key. `PUBLIC_SITE_URL` and `PUBLIC_INDEXABLE` keep their existing deployment meanings.
+- Runtime bindings: `EMAIL` restricted to the fixed recipient/sender, `QUOTE_LIMITS`, `ASSETS`, and the variables in `wrangler.jsonc`. Generate binding types with `npx wrangler types worker/env.d.ts --include-runtime false` after changing configuration.
+- To switch recipients, first verify the new address in Cloudflare, then update the handler's fixed recipient, `CONTACT_TO`, and the `send_email.destination_address` restriction together. Validate delivery before retiring the temporary recipient.
+- Direct phone and email actions remain visible above the form, including when sending is enabled. Failed/limited submissions also offer contact links.
 
-| Variable | Value |
-|---|---|
-| `PUBLIC_SITE_URL` | Exact production origin, e.g. `https://steliteprojects.fr` |
-| `PUBLIC_ENABLE_QUOTES` | `true` only when configuration and policy are ready |
-| `PUBLIC_TURNSTILE_SITE_KEY` | Public Turnstile site key |
-| `PUBLIC_INDEXABLE` | `true` only when ready for public search indexing |
-
-4. Edit non-secret runtime values in `wrangler.jsonc`:
-
-| Variable | Value |
-|---|---|
-| `QUOTES_ENABLED` | `true` |
-| `CONTACT_TO` | Confirmed destination, initially `steliteprojects@gmail.com` |
-| `MAIL_FROM` | e.g. `ST ELITE PROJECTS <contact@steliteprojects.fr>`; verified sender required |
-| `TURNSTILE_HOSTNAME` | Exact host, no scheme/path, e.g. `steliteprojects.fr` |
-
-Use one canonical hostname for enquiries. Redirect other hostnames to it; if you switch from `workers.dev` to a custom domain, update the Turnstile widget and hostname setting together.
-
-5. Add secrets to Cloudflare (commands prompt for values):
-
-```sh
-npx wrangler secret put RESEND_API_KEY
-npx wrangler secret put TURNSTILE_SECRET_KEY
-npm run deploy
-```
-
-Never place secrets in `PUBLIC_*` variables, source files or GitHub commits. For local Wrangler development, use the ignored `.dev.vars` file instead.
-
-6. Send one real test enquiry after launch configuration and verify arrival in the intended inbox, attachment handling and Reply-To. The automated tests mock Turnstile/Resend, so successful real delivery has not been verified in the supplied project.
-
-The Worker checks same-origin POSTs, input lengths, required fields and policy acknowledgement, enabled services, a honeypot, a streamed 10 MiB body limit, photo counts/sizes/signatures, and Turnstile hostname/action. Email is plain text, with normalised attachment filenames. Provider errors remain errors. It does not send an automatic email to the visitor; the visitor sees an on-page confirmation only after the email provider accepts the request.
+The owner explicitly requested activation while holding all legal/privacy-page changes pending Artur's confirmation. Those published pages remain drafts; this implementation does not claim that they are complete or update them silently.
 
 ## 5. Add the company content
 

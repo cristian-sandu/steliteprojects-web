@@ -12,17 +12,19 @@
     "check": "astro check && tsc -p tsconfig.worker.json",
     "preview": "npm run build && wrangler dev",
     "deploy": "npm run build && wrangler deploy",
-    "test": "node --import tsx --test tests/*.test.ts"
+    "test": "node --import tsx --test tests/*.test.ts tests/runtime/*.test.ts"
   },
   "dependencies": {
     "astro": "7.3.5"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",
-    "typescript": "6.0.3",
-    "wrangler": "4.143.1",
     "@cloudflare/workers-types": "5.20260929.1",
+    "@types/node": "26.6.3",
+    "esbuild": "0.28.2",
+    "miniflare": "5.20260926.1-alpha",
     "tsx": "4.23.15",
-    "@types/node": "26.6.3"
+    "typescript": "6.0.3",
+    "wrangler": "4.143.1"
   }
 }

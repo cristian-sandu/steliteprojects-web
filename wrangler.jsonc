@@ -13,9 +13,34 @@
     "not_found_handling": "404-page"
   },
   "vars": {
-    "QUOTES_ENABLED": "false",
-    "CONTACT_TO": "steliteprojects@gmail.com",
-    "MAIL_FROM": "",
-    "TURNSTILE_HOSTNAME": ""
-  }
+    "QUOTES_ENABLED": "true",
+    "CONTACT_TO": "cristian.sandu.connect@gmail.com",
+    "MAIL_FROM": "devis@forms.steliteprojects.com",
+    "TURNSTILE_HOSTNAME": "steliteprojects-web.cristian-sandu-connect.workers.dev"
+  },
+  "send_email": [
+    {
+      "name": "EMAIL",
+      "destination_address": "cristian.sandu.connect@gmail.com",
+      "allowed_sender_addresses": [
+        "devis@forms.steliteprojects.com"
+      ]
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "QUOTE_LIMITS",
+        "class_name": "QuoteLimits"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "quote-limits-v1",
+      "new_sqlite_classes": [
+        "QuoteLimits"
+      ]
+    }
+  ]
 }

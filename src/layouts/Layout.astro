@@ -4,11 +4,11 @@ import Brand from '../components/Brand.astro';
 import { company, languages, href, type Lang, type Page } from '../data/company';
 import { activeServices } from '../data/services';
 import copy from '../data/copy.json';
-interface Props {lang:Lang; page:Page; title:string}
+interface Props {lang:Lang; page:Page; title:string; noindex?:boolean}
 const {lang,page,title}=Astro.props;
 const d=copy[lang];
 const navPages=['','services','about','projects','contact'];
-const indexable=import.meta.env.PUBLIC_INDEXABLE === 'true';
+const indexable=!Astro.props.noindex && import.meta.env.PUBLIC_INDEXABLE !== 'false';
 const absolute=(l:Lang)=>new URL(href(l,page),Astro.site).href;
 ---
 <!doctype html>

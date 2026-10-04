@@ -113,27 +113,25 @@ The owner explicitly requested activation while holding all legal/privacy-page c
 
 A service switch removes it from service cards, footer, hero list and contact options, hides associated projects, and rejects that service on the backend. Rebuild and deploy after changing it.
 
-Place approved, compressed images in `public/images/projects/`. Use `.webp`/`.avif` for site photography, descriptive filenames, ideally around 1600px wide and under 300KB. The layout reserves image dimensions and lazy-loads galleries. Automatic source-image compression is not included; optimise supplied originals before adding them. Keep originals in a separate backed-up company folder.
+Place approved original photographs in `src/assets/projects/` and import them in `src/data/projects.ts`. Astro generates responsive WebP versions and a larger version for opening in a new tab. Images reserve their dimensions and galleries load lazily. Each entry describes visible equipment without assuming that different photographs are from the same job.
 
-Example project entry (replace with real details and files):
+Example entry:
 
 ```ts
+import photo from '../assets/projects/electrical-panel.jpg';
+// In the projects array:
 {
-  slug: 'tableau-montreuil',
-  city: 'Montreuil',
+  slug: 'electrical-panel',
   service: 'electricity',
-  title: {fr: 'Rénovation d’un tableau électrique', en: 'Electrical panel renovation'},
-  description: {fr: 'Description réelle des travaux.', en: 'An accurate description of the work.'},
-  images: [
-    {src: '/images/projects/tableau-avant.webp', alt: {fr: 'Tableau avant les travaux', en: 'Panel before renovation'}},
-    {src: '/images/projects/tableau-apres.webp', alt: {fr: 'Tableau après les travaux', en: 'Panel after renovation'}}
-  ]
+  title: {fr: 'Tableau électrique', en: 'Electrical panel'},
+  description: {fr: 'Description vérifiée de la photo.', en: 'Verified description of the photograph.'},
+  image: photo,
 }
 ```
 
-The project gallery opens original images in a new tab. Add 3–8 photos per real project. Do not publish customer addresses, licence plates, faces or identifying documents without the necessary permission.
+The gallery currently includes seven supplied photographs. Enlarged images open in a new tab. Portrait and landscape photographs remain fully visible.
 
-The selected logo is included unchanged at `public/images/st-elite-projects-signature.png`, displayed in the header, footer and homepage. CSS isolates the main black-and-gold logo from its presentation board. Original project photos are still pending. The selected 02 — Signature logo is displayed from its original presentation artwork through a CSS viewport. Google Fonts supplies Manrope and DM Sans, with system-font fallbacks. If you prefer no third-party font requests, self-host the licensed font files and replace the CSS import.
+The selected logo is included unchanged at `public/images/st-elite-projects-signature.png`, displayed in the header, footer and homepage. CSS isolates the main black-and-gold logo from its presentation board. The selected 02 — Signature logo is displayed from its original presentation artwork through a CSS viewport. Google Fonts supplies Manrope and DM Sans, with system-font fallbacks. If you prefer no third-party font requests, self-host the licensed font files and replace the CSS import.
 
 ## 6. Connect the domain and launch
 
@@ -170,4 +168,4 @@ The Romanian website brief supplies the SIRET, French company/about/contact copy
 
 ## Logo colour refinement
 
-The site uses charcoal, warm ivory and muted gold, with dark bronze links for readable contrast. The design keeps Artur’s requested headline, hero summary, seven-service overview and lower slogan. See `docs/artur-content-review.md` for the source-by-source review, remaining content/configuration items and design references. Production metadata defaults to the current Worker URL; `PUBLIC_SITE_URL` can override it when a custom domain is added.
+The site uses charcoal, warm ivory and muted gold, with dark bronze links for readable contrast. The design keeps Artur’s requested headline, hero summary, seven-service overview and lower slogan. See `docs/artur-content-review.md` for the source-by-source review, remaining content/configuration items and design references. Production metadata defaults to `https://steliteprojects.com`. `PUBLIC_INDEXABLE=false` is an explicit override for previews; the public deployment sets it to `true`.

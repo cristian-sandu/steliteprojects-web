@@ -3,6 +3,7 @@ import ServiceIcon from './ServiceIcon.astro';
 import {activeServices} from '../data/services';
 import {href,type Lang} from '../data/company';
 import copy from '../data/copy.json';
-const {lang}=Astro.props as {lang:Lang};
+const {lang,headingLevel=3}=Astro.props as {lang:Lang;headingLevel?:2|3};
+const Heading=headingLevel===2?'h2':'h3';
 ---
-<div class="grid">{activeServices.map((service,i)=><article class="service" id={service.id}><div class="service-top"><ServiceIcon service={service.id}/><span class="number">{String(i+1).padStart(2,'0')} / ST ÉLITE</span></div><h3>{service[lang].name}</h3><p>{service[lang].description}</p><ul>{service[lang].items.map(item=><li>{item}</li>)}</ul><a class="textlink" aria-label={`${copy[lang].quote} — ${service[lang].name}`} href={`${href(lang,'contact')}?service=${service.id}`}>{copy[lang].quote}</a></article>)}</div>
+<div class="grid">{activeServices.map((service,i)=><article class="service" id={service.id}><div class="service-top"><ServiceIcon service={service.id}/><span class="number">{String(i+1).padStart(2,'0')} / ST ÉLITE</span></div><Heading>{service[lang].name}</Heading><p>{service[lang].description}</p><ul>{service[lang].items.map(item=><li>{item}</li>)}</ul><a class="textlink" aria-label={`${copy[lang].quote} — ${service[lang].name}`} href={`${href(lang,'contact')}?service=${service.id}`}>{copy[lang].quote}</a></article>)}</div>

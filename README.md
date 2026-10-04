@@ -169,3 +169,7 @@ The Romanian website brief supplies the SIRET, French company/about/contact copy
 ## Logo colour refinement
 
 The site uses charcoal, warm ivory and muted gold, with dark bronze links for readable contrast. The design keeps Artur’s requested headline, hero summary, seven-service overview and lower slogan. See `docs/artur-content-review.md` for the source-by-source review, remaining content/configuration items and design references. Production metadata defaults to `https://steliteprojects.com`. `PUBLIC_INDEXABLE=false` is an explicit override for previews; the public deployment sets it to `true`.
+
+## SEO verification
+
+See `docs/seo-review.md`. Search metadata lives in `src/data/seo.ts`; sitemap language and photo entries are generated in `src/pages/sitemap.xml.ts`. `npm run build` now runs generated-page SEO validation automatically. Use `npm run check:seo` to repeat it for an existing build. Configure `PUBLIC_SITE_URL` consistently when overriding the public origin; `PUBLIC_INDEXABLE=false` is the explicit preview override.

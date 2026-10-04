@@ -4,21 +4,58 @@ import Brand from '../components/Brand.astro';
 import { company, languages, href, type Lang, type Page } from '../data/company';
 import { activeServices } from '../data/services';
 import copy from '../data/copy.json';
+import {metadata,structuredData} from '../data/seo';
 interface Props {lang:Lang; page:Page; title:string; noindex?:boolean}
 const {lang,page,title}=Astro.props;
 const d=copy[lang];
 const navPages=['','services','about','projects','contact'];
 const indexable=!Astro.props.noindex && import.meta.env.PUBLIC_INDEXABLE !== 'false';
 const absolute=(l:Lang)=>new URL(href(l,page),Astro.site).href;
+const meta=Astro.props.noindex?{title,description:lang==='fr'?'La page demandée est introuvable.':'The requested page could not be found.'}:metadata[lang][page];
+const fullTitle=`${meta.title} | ${company.name}`;
+const locale=lang==='fr'?'fr_FR':'en_GB';
+const shareImage=new URL(`/images/social-${lang}.png`,Astro.site).href;
+const breadcrumbLabel=page==='legal'?d.legal:page==='privacy'?d.privacy:d.nav[navPages.indexOf(page)];
+const jsonLd=JSON.stringify(structuredData(Astro.site!,lang,page)).replace(/</g,'\\u003c');
 ---
 <!doctype html>
 <html lang={lang}>
-<head><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>{title} | {company.name}</title><meta name="description" content={d.intro}/><meta name="robots" content={indexable?'index,follow':'noindex,nofollow'}/><link rel="canonical" href={absolute(lang)}/>{languages.map(l=><link rel="alternate" hreflang={l} href={absolute(l)}/>)}<link rel="alternate" hreflang="x-default" href={absolute('fr')}/><meta property="og:title" content={`${title} | ${company.name}`}/><meta property="og:description" content={d.intro}/><meta property="og:type" content="website"/><meta property="og:url" content={absolute(lang)}/></head>
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>{fullTitle}</title>
+<meta name="description" content={meta.description}/>
+<meta name="robots" content={indexable?'index,follow,max-image-preview:large':'noindex,nofollow'}/>
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon.png"/>
+<meta name="theme-color" content="#252522"/>
+{!Astro.props.noindex&&<Fragment><link rel="canonical" href={absolute(lang)}/>{languages.map(l=><link rel="alternate" hreflang={l} href={absolute(l)}/>)}<link rel="alternate" hreflang="x-default" href={absolute('fr')}/></Fragment>}
+<meta property="og:title" content={fullTitle}/>
+<meta property="og:description" content={meta.description}/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content={company.name}/>
+<meta property="og:locale" content={locale}/>
+<meta property="og:locale:alternate" content={lang==='fr'?'en_GB':'fr_FR'}/>
+<meta property="og:url" content={absolute(lang)}/>
+<meta property="og:image" content={shareImage}/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:image:type" content="image/png"/>
+<meta property="og:image:alt" content={meta.title}/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content={fullTitle}/>
+<meta name="twitter:description" content={meta.description}/>
+<meta name="twitter:image" content={shareImage}/>
+<meta name="twitter:image:alt" content={meta.title}/>
+{!Astro.props.noindex&&<script type="application/ld+json" set:html={jsonLd}/>}
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap"/>
+</head>
 <body>
 <a href="#main" class="skip-link">{lang==='fr'?'Aller au contenu':'Skip to content'}</a>
 <div class="top"><div class="wrap"><span>MONTREUIL · PARIS · ÎLE-DE-FRANCE</span><span>{d.audience}</span></div></div>
 <header><div class="wrap header"><a class:list={["logo", {"brand-image": Boolean(company.logo)}]} href={href(lang)} aria-label={company.name}>{company.logo?<Brand/>:<Fragment>ST <b>ÉLITE</b><small>PROJECTS</small></Fragment>}</a><nav aria-label={lang==='fr'?'Navigation principale':'Main navigation'}>{navPages.map((p,i)=><a href={href(lang,p)} aria-current={p===page?'page':undefined}>{d.nav[i]}</a>)}</nav><div class="tools"><div class="lang">{languages.map(l=><a href={href(l,page)} lang={l} class:list={{active:l===lang}} aria-label={l==='fr'?'Français':'English'}>{l.toUpperCase()}</a>)}</div><a class="header-phone" href={`tel:${company.phoneHref}`} aria-label={`${d.call} — ${company.phone}`}>{company.phone}</a><a class="button" href={href(lang,'contact')}>{d.quote}</a><button class="menu" aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">☰</button></div></div><div class="mobile-nav" id="mobile-nav">{navPages.map((p,i)=><a href={href(lang,p)} aria-current={p===page?'page':undefined}>{d.nav[i]}</a>)}</div></header>
-<main id="main"><slot/>{page!=='contact'&&<section class="cta-band"><div class="wrap"><h2>{d.cta}</h2><a class="button" href={href(lang,'contact')}>{d.quote}</a></div></section>}</main>
+<main id="main">{page&&!Astro.props.noindex&&<nav class="breadcrumbs wrap" aria-label={lang==='fr'?"Fil d’Ariane":"Breadcrumb"}><ol><li><a href={href(lang)}>{d.nav[0]}</a></li><li><span aria-current="page">{breadcrumbLabel}</span></li></ol></nav>}<slot/>{page!=='contact'&&<section class="cta-band"><div class="wrap"><h2>{d.cta}</h2><a class="button" href={href(lang,'contact')}>{d.quote}</a></div></section>}</main>
 <footer><div class="wrap"><div class="footer-grid"><div><a class:list={["logo", {"brand-image": Boolean(company.logo)}]} href={href(lang)} aria-label={company.name}>{company.logo?<Brand/>:<Fragment>ST <b>ÉLITE</b><small>PROJECTS</small></Fragment>}</a><p>{d.region}<br/>{activeServices.map(s=>s[lang].name).join(' · ')}</p></div><div class="links"><h3>Navigation</h3>{navPages.map((p,i)=><a href={href(lang,p)}>{d.nav[i]}</a>)}</div><div><h3>Contact</h3><a href={`tel:${company.phoneHref}`}>{company.phone}</a><br/><a href={`mailto:${company.email}`}>{company.email}</a><p>{company.address}<br/>{company.city}</p></div></div><div class="fine"><span>© {new Date().getFullYear()} {company.name}</span><span><a href={href(lang,'legal')}>{d.legal}</a> · <a href={href(lang,'privacy')}>{d.privacy}</a></span></div></div></footer>
 <div class="mobile-bar"><a href={`tel:${company.phoneHref}`}>{d.call}</a><a href={href(lang,'contact')}>{d.quote}</a></div>
 <script>

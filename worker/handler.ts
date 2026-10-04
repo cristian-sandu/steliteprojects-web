@@ -34,7 +34,8 @@ export default {
   if(url.pathname!=='/api/quote')return fail('not_found',404);
   if(request.method!=='POST')return new Response(null,{status:405,headers:{Allow:'POST'}});
   if(env.QUOTES_ENABLED!=='true'||!env.EMAIL||!env.QUOTE_LIMITS||!env.TURNSTILE_SECRET_KEY||!env.TURNSTILE_HOSTNAME||!env.MAIL_FROM||env.CONTACT_TO!==RECIPIENT)return fail('not_configured',503);
-  if(url.hostname!==env.TURNSTILE_HOSTNAME)return fail('hostname_rejected',403);
+  const allowedHosts=env.TURNSTILE_HOSTNAME.split(',').map(host=>host.trim());
+  if(!allowedHosts.includes(url.hostname))return fail('hostname_rejected',403);
   if(request.headers.get('origin')!==url.origin)return fail('origin_rejected',403);
   if(!request.headers.get('content-type')?.startsWith('multipart/form-data;'))return fail('invalid_content_type',415);
   try {
@@ -53,7 +54,7 @@ export default {
    const verify=await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({secret:env.TURNSTILE_SECRET_KEY,response:token,remoteip:request.headers.get('CF-Connecting-IP')||undefined}),signal:AbortSignal.timeout(10000)});
    if(!verify.ok)return fail('verification_unavailable',502);
    const challenge=await verify.json() as {success:boolean;hostname?:string;action?:string};
-   if(!challenge.success||challenge.hostname!==env.TURNSTILE_HOSTNAME||challenge.action!=='quote')return fail('verification_failed',403);
+   if(!challenge.success||challenge.hostname!==url.hostname||challenge.action!=='quote')return fail('verification_failed',403);
    const attachments=[];
    for(let i=0;i<files.length;i++){
     const bytes=new Uint8Array(await files[i].arrayBuffer());const type=imageType(bytes);

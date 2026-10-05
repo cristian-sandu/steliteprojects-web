@@ -3,7 +3,7 @@ import {utcDay} from './quota-ledger';
 export type Env = Omit<Cloudflare.Env,'QUOTES_ENABLED'|'MAIL_FROM'|'TURNSTILE_HOSTNAME'|'CONTACT_TO'> & {
  TURNSTILE_SECRET_KEY:string; QUOTES_ENABLED:string; MAIL_FROM:string; TURNSTILE_HOSTNAME:string; CONTACT_TO:string;
 };
-const RECIPIENT='cristian.sandu.connect@gmail.com';
+const RECIPIENT='steliteprojects@gmail.com';
 async function visitorKey(ip:string,day:string,secret:string):Promise<string>{
  const encoder=new TextEncoder();
  const key=await crypto.subtle.importKey('raw',encoder.encode(secret),{name:'HMAC',hash:'SHA-256'},false,['sign']);

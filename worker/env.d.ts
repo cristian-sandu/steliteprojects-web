@@ -4,7 +4,7 @@ interface __BaseEnv_Env {
 	EMAIL: SendEmail;
 	ASSETS: Fetcher;
 	QUOTES_ENABLED: "true";
-	CONTACT_TO: "cristian.sandu.connect@gmail.com";
+	CONTACT_TO: "steliteprojects@gmail.com";
 	MAIL_FROM: "devis@forms.steliteprojects.com";
 	TURNSTILE_HOSTNAME: "steliteprojects.com,steliteprojects-web.cristian-sandu-connect.workers.dev";
 	QUOTE_LIMITS: DurableObjectNamespace<import("./index").QuoteLimits>;

@@ -14,14 +14,14 @@
   },
   "vars": {
     "QUOTES_ENABLED": "true",
-    "CONTACT_TO": "cristian.sandu.connect@gmail.com",
+    "CONTACT_TO": "steliteprojects@gmail.com",
     "MAIL_FROM": "devis@forms.steliteprojects.com",
     "TURNSTILE_HOSTNAME": "steliteprojects.com,steliteprojects-web.cristian-sandu-connect.workers.dev"
   },
   "send_email": [
     {
       "name": "EMAIL",
-      "destination_address": "cristian.sandu.connect@gmail.com",
+      "destination_address": "steliteprojects@gmail.com",
       "allowed_sender_addresses": [
         "devis@forms.steliteprojects.com"
       ]

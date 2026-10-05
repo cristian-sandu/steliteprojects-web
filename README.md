@@ -87,7 +87,7 @@ Do not choose an SPA fallback. This is a pre-rendered multi-page website; `wrang
 
 The production form uses native Cloudflare Email Service with a fixed verified destination, Cloudflare Turnstile, and a SQLite Durable Object quota ledger. No Resend account or API key is required.
 
-- Current temporary recipient: `cristian.sandu.connect@gmail.com`. Public contact links continue to use `steliteprojects@gmail.com`.
+- Contact form recipient: `steliteprojects@gmail.com`. Public contact links use `contact@steliteprojects.com`, which forwards to the same business Gmail.
 - Sender: `devis@forms.steliteprojects.com`; Email Routing is enabled on the dedicated forms subdomain.
 - Workers Free is confirmed by the account owner's dashboard screenshot. Cloudflare documents sending to verified destinations as free on all plans. Do not upgrade Workers or enable arbitrary-recipient sending for this form.
 - Limit: 50 reserved email attempts per UTC day globally; three per IP per day, at least ten minutes apart. Failed provider sends consume a slot conservatively. Quota outages reject submission. Daily identifiers are purged by an alarm 48 hours after the day's start.
